@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  iprwc-mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=iprwc
+      - MYSQL_USER=iprwc
+      - MYSQL_PASSWORD=admin
+    volumes:
+      - iprwc-mysql-volume:/var/lib/mysql
+    ports:
+      - 3307:3307
+
+  iprwc-api:
+    build: .
+    restart: on-failure
+    env_file: .env
+    environment:
+      - DATABASE_HOST
+      - DATABASE_PORT
+      - DATABASE_NAME
+      - DATABASE_USER
+      - DATABASE_PASSWORD
+    depends_on:
+      - iprwc-mysql
+    volumes:
+      - ./data:/data
+    ports:
+      - 8081:8081
+
+volumes:
+  iprwc-mysql-volume:
