@@ -12,7 +12,7 @@ services:
     volumes:
       - iprwc-mysql-volume:/var/lib/mysql
     ports:
-      - 3307:3307
+      - 3306:3306
 
   iprwc-api:
     build: .
@@ -29,7 +29,7 @@ services:
     volumes:
       - ./data:/data
     ports:
-      - 8081:8081
+      - 8080:8080
 
 volumes:
   iprwc-mysql-volume:
