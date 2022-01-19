@@ -9,6 +9,8 @@ services:
       - MYSQL_DATABASE=iprwc
       - MYSQL_USER=iprwc
       - MYSQL_PASSWORD=admin
+    cap_add:
+      - SYS_NICE
     volumes:
       - iprwc-mysql-volume:/var/lib/mysql
     ports:

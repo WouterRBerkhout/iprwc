@@ -1,8 +1,9 @@
-package nl.birchwood.iprwc.user.model;
+package nl.birchwood.iprwc.purchase.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.birchwood.iprwc.purchase.model.Purchase;
+import nl.birchwood.iprwc.purchaseditem.model.PurchasedItem;
+import nl.birchwood.iprwc.user.model.AppUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Getter @Setter
-public class AppUser {
+public class Purchase {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -21,15 +22,12 @@ public class AppUser {
     @org.hibernate.annotations.Type(type="uuid-char")
     private UUID id;
 
-    private String username;
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Purchase> purchase;
-
     @CreatedDate
     private Date createDate = new Date();
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private AppUser user;
+
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PurchasedItem> purchasedItems;
 }
