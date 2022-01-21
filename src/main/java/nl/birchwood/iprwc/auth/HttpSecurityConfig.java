@@ -63,7 +63,7 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests(
                         configurer -> configurer
-                                .antMatchers("/auth/**")
+                                .antMatchers("/auth/**", "/item", "/user")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

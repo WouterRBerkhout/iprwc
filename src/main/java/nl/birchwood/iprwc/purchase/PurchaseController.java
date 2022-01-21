@@ -30,7 +30,7 @@ public class PurchaseController {
     Page<PurchaseResponse> getAllPurchases(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortBy
+            @RequestParam(defaultValue = "createDate") String sortBy
     ) {
         return purchaseService.findAll(page, size, sortBy);
     }
