@@ -55,6 +55,7 @@ public class PurchasedItemService {
         purchasedItem.setPurchase(purchase);
         purchasedItem.setName(item.getName());
         purchasedItem.setQuantity(quantity);
+        item.setStock(item.getStock() - quantity);
         purchasedItem.setPrice(item.getPrice());
         purchasedItemRepository.save(purchasedItem);
         return new PurchasedItemResponse(purchasedItem);
